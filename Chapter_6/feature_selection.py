@@ -21,7 +21,7 @@ def main():
          'city_West Terrence'])
 
     # Load the previously trained model in train_model.py.
-    model = joblib.load('trained_house_classifier_model.pkl')
+    model = joblib.load('../Chapter_7/trained_house_classifier_model.pkl')
 
     # Create new numpy array based on model feature priority.
     importance = model.feature_importances_

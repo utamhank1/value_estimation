@@ -44,7 +44,7 @@ def main(file):
     Y = sale_price.to_numpy()
 
     # Split data into training and testing sets with a 70%/30% split.
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3, random_state=0)
 
     # Fit regression model.
     model = ensemble.GradientBoostingRegressor(

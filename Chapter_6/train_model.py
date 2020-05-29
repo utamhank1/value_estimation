@@ -19,7 +19,7 @@ def parse_arguments():
 
 
 def main(file):
-    print("Hello, World: You are running train_model_pt4.py")
+    print("Hello, World: You are running train_model.py")
 
     # Load the dataset.
     df = pd.read_csv(file)
@@ -36,37 +36,36 @@ def main(file):
     features_df = pd.get_dummies(df, columns=['garage_type', 'city'])
 
     # Remove the sale price column from the feature dataset (this is the column that we want to predict).
-    sale_price = df['sale_price']
-    del df['sale_price']
+    del features_df['sale_price']
 
     # Create X and Y arrays for inputting to the model.
     X = features_df.to_numpy()
-    Y = sale_price.to_numpy()
+    y = df['sale_price'].to_numpy()
 
     # Split data into training and testing sets with a 70%/30% split.
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
-    # Fit regression model.
+    # Fit regression model
     model = ensemble.GradientBoostingRegressor(
         n_estimators=1000,
-        learning_rate=.1,
+        learning_rate=0.1,
         max_depth=6,
         min_samples_leaf=9,
-        max_features=.1,
-        loss='huber'
+        max_features=0.1,
+        loss='huber',
+        random_state=0
     )
-
-    model.fit(X_train, Y_train)
+    model.fit(X_train, y_train)
 
     # Save the trained model to file so that it can be used within other programs.
-    joblib.dump(model, 'trained_house_classifier_model.pkl')
+    joblib.dump(model, '../Chapter_7/trained_house_classifier_model.pkl')
 
     # Find the training data set model error rate.
-    mse_train = mean_absolute_error(Y_train, model.predict(X_train))
+    mse_train = mean_absolute_error(y_train, model.predict(X_train))
     print(f"Training data set mean absolute error: {mse_train}")
 
     # Find the test dataset model error rate.
-    mse_test = mean_absolute_error(Y_test, model.predict(X_test))
+    mse_test = mean_absolute_error(y_test, model.predict(X_test))
     print(f"Testing data set mean absolute error: {mse_test}")
 
 
