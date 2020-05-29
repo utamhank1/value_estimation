@@ -19,7 +19,7 @@ def parse_arguments():
 
 
 def main(file):
-    print("Hello, World: You are running train_model_pt4.py")
+    print("Hello, World: You are running grid_search.py")
 
     # Load the dataset.
     df = pd.read_csv(file)
