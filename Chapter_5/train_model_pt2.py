@@ -44,7 +44,6 @@ def main(file):
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
 
 
-
 if __name__ == "__main__":
     args = parse_arguments()
     main(args)

@@ -61,11 +61,11 @@ def main(file):
     joblib.dump(model, '../Chapter_7/trained_house_classifier_model.pkl')
 
     # Find the training data set model error rate.
-    mse_train = mean_absolute_error(Y_train, model.predict(X_train))
+    mse_train = mean_absolute_error(y_train, model.predict(X_train))
     print(f"Training data set mean absolute error: {mse_train}")
 
     # Find the test dataset model error rate.
-    mse_test = mean_absolute_error(Y_test, model.predict(X_test))
+    mse_test = mean_absolute_error(y_test, model.predict(X_test))
     print(f"Testing data set mean absolute error: {mse_test}")
 
 
