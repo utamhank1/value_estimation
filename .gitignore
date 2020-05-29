@@ -130,3 +130,9 @@ dmypy.json
 
 # .idea file
 *.idea/
+
+# sklearn models.
+*.pkl
+
+# .html files
+*.html
