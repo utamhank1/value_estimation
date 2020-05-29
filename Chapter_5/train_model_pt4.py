@@ -2,6 +2,7 @@ import argparse
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn import ensemble
+from sklearn.metrics import mean_absolute_error
 import joblib
 
 
@@ -18,7 +19,7 @@ def parse_arguments():
 
 
 def main(file):
-    print("Hello, World: You are running train_model_pt3.py")
+    print("Hello, World: You are running train_model_pt4.py")
 
     # Load the dataset.
     df = pd.read_csv(file)
@@ -59,6 +60,14 @@ def main(file):
 
     # Save the trained model to file so that it can be used within other programs.
     joblib.dump(model, 'trained_house_classifier_model.pkl')
+
+    # Find the training data set model error rate.
+    mse_train = mean_absolute_error(Y_train, model.predict(X_train))
+    print(f"Training data set mean absolute error: {mse_train}")
+
+    # Find the test dataset model error rate.
+    mse_test = mean_absolute_error(Y_test, model.predict(X_test))
+    print(f"Testing data set mean absolute error: {mse_test}")
 
 
 if __name__ == "__main__":

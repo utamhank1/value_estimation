@@ -16,7 +16,7 @@ def parse_arguments():
 
 
 def main(file):
-    print("Hello, World: You are running train_model_pt1.py")
+    print("Hello, World: You are running train_model_pt2.py")
 
     # Load the dataset.
     df = pd.read_csv(file)
