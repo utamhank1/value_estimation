@@ -1,5 +1,8 @@
 import argparse
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn import ensemble
+import joblib
 
 
 def parse_arguments():
@@ -36,8 +39,26 @@ def main(file):
     del df['sale_price']
 
     # Create X and Y arrays for inputting to the model.
-    X = features_df.as_matrix()
-    Y = sale_price.as_matrix()
+    X = features_df.to_numpy()
+    Y = sale_price.to_numpy()
+
+    # Split data into training and testing sets with a 70%/30% split.
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
+
+    # Fit regression model.
+    model = ensemble.GradientBoostingRegressor(
+        n_estimators=1000,
+        learning_rate=.1,
+        max_depth=6,
+        min_samples_leaf=9,
+        max_features=.1,
+        loss='huber'
+    )
+
+    model.fit(X_train, Y_train)
+
+    # Save the trained model to file so that it can be used within other programs.
+    joblib.dump(model, 'trained_house_classifier_model.pkl')
 
 
 if __name__ == "__main__":

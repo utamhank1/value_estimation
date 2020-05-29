@@ -1,5 +1,6 @@
 import argparse
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 
 def parse_arguments():
@@ -38,6 +39,10 @@ def main(file):
     # Create X and Y arrays for inputting to the model.
     X = features_df.as_matrix()
     Y = sale_price.as_matrix()
+
+    # Split data into training and testing sets with a 70%/30% split.
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
+
 
 
 if __name__ == "__main__":
